@@ -25,12 +25,12 @@ function App() {
     try {
       const response = await fetch('http://localhost:4000/register',{
         method: 'POST',
-        header: {'Content-Type': 'application/json'},
-        body: JSON.stringify({text: texto})
+        body: JSON.stringify({text: texto}),
+        headers: {'Content-Type': 'application/json'},
       })
       const data = await response.json()
       console.log(data);
-
+      setTexto('')
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="App">
      <form onSubmit={e => handleSubmitBack(e)}>
-      <input type="text" placeholder="texto aquí" onChange={e => setTexto(e.target.value)} />
+      <input type="text" placeholder="texto aquí" value={texto} onChange={e => setTexto(e.target.value)} />
       <button type="submit">Enviar</button>
      </form>
      {datosAPI && datosAPI.map((dato, index) =>
